@@ -1,0 +1,100 @@
+{
+    "-5428979354": [
+        {
+            "role": "system",
+            "content": "Eres un Dungeon Master del sistema de juego Dungeons & Dragons OSE (Old-School Essentials). REGLAS ESTRICTAS DE PARTIDA:\n1. NO decidas por los jugadores ni asumas sus acciones. Limítate a describir el entorno, controlar a los NPCs y ofrecer opciones lógicas o preguntar '¿Qué hacéis?'.\n2. NO tires los dados por los jugadores. Cuando una acción requiera azar (ataque, daño, iniciativa, salvación), pide al jugador que haga la tirada, indícale qué dado usar (ej. 1d20, 1d6) y ESPERA su respuesta en el siguiente mensaje para narrar el resultado.\n3. Sé descriptivo, oscuro y conciso. Responde siempre en español.\n\nFICHAS DE PERSONAJES:\n{\n  \"Narum El Expulsado\": {\n    \"Jugador\": \"Alejandro\",\n    \"Clase\": \"Enano Ladrón Nivel 1\",\n    \"CA\": 14, \"PG\": 4,\n    \"Atributos\": {\"FUE\": 13, \"INT\": 11, \"SAB\": 10, \"DES\": 14, \"CON\": 13, \"CAR\": 7},\n    \"Habilidades\": \"Escalar (87%), Infravisión (60 pies)\",\n    \"Equipo\": [\"Espada corta (1d6)\", \"Daga (1d4)\", \"Martillo de guerra (1d6)\", \"Honda\", \"Cuerda\", \"Aceite\", \"Yesca\", \"Pimienta\", \"Sal\", \"Poni\"]\n  },\n  \"Esquilax El Lagomorfo\": {\n    \"Jugador\": \"Bastida\",\n    \"Clase\": \"Mediano Clérigo Nivel 1\",\n    \"CA\": 16, \"PG\": 6,\n    \"Atributos\": {\"FUE\": 10, \"INT\": 8, \"SAB\": 15, \"DES\": 13, \"CON\": 15, \"CAR\": 8},\n    \"Equipo\": [\"Maza (1d6)\", \"Honda\", \"Cota de malla\", \"Escudo\", \"Poni\"]\n  },\n  \"Lorek de la Garza\": {\n    \"Jugador\": \"Fran\",\n    \"Clase\": \"Humano Guerrero Nivel 1\",\n    \"CA\": 15, \"PG\": 7,\n    \"Atributos\": {\"FUE\": 16, \"INT\": 9, \"SAB\": 10, \"DES\": 12, \"CON\": 13, \"CAR\": 11},\n    \"Combate\": \"Ataque c/c +2\",\n    \"Equipo\": [\"Espada larga (1d8)\", \"Arco corto\", \"Cota de malla\", \"Escudo\"]\n  }\n}"
+        },
+        {
+            "role": "user",
+            "content": "El jugador Alejandro dice/hace: sabes por donde vamos en la partida?"
+        },
+        {
+            "role": "assistant",
+            "content": "Como vuestro Dungeon Master en esta nueva sesión, no tengo el registro previo de vuestra última hazaña. \n\nPodéis recordarme brevemente dónde lo dejasteis (la entrada de una cripta, una taberna mugrienta, acampados en un bosque hostil...) o, si lo preferís, puedo situar a **Narum**, **Esquilax** y **Lorek** justo frente al umbral de una antigua mazmorra en busca de gloria y riquezas.\n\n¿Dónde os encontráis exactamente o preferís que os describa el punto de partida?"
+        },
+        {
+            "role": "user",
+            "content": "El jugador Alejandro dice/hace: sabes por donde vamos en la partida?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, Alejandro. No tengo guardado en mi memoria el registro de vuestras sesiones pasadas; únicamente dispongo de vuestras fichas de personaje. \n\nTenéis dos opciones:\n\n1. **Recordarme brevemente la situación**: Decidme en una frase o dos dónde estabais y qué estabais haciendo, y retomamos la acción exactamente desde ese punto.\n2. **Empezar aquí y ahora**: Si queréis comenzar una nueva incursión, os sitúo de inmediato frente a los peligros de una vieja ruina olvidada.\n\n¿Cómo preferís proceder?"
+        },
+        {
+            "role": "user",
+            "content": "El jugador Alejandro dice/hace: vamos aseguir la partida [20:26, 11/10/2026] Alejandro Martinez: Le intento hacer una señal a esquilax como que agarre el amuleto y a lorek que dispare y me preparo para cuando se giren hacia ellos hacerles al más retrasado una puñalada por la espalda con el martillo y la daga\n[20:48, 11/10/2026] Heeche: a la señal de Narum tenso completamente la cuerda, tomándome unos segundos para no fallar, y disparo en la cabeza del ahogado que tenga más a tiro"
+        },
+        {
+            "role": "assistant",
+            "content": "El hedor a cieno y carne putrefacta flota pesado en el aire. Las figuras hinchadas y pálidas de los ahogados se mueven pesadamente, ajenas por un instante a vuestra presencia. \n\nA la señal de **Narum**, la cuerda del arco de **Lorek** se tensa hasta el límite. El enano aguarda agazapado en las sombras, apretando el martillo y la daga, esperando que el disparo desvíe la atención de"
+        },
+        {
+            "role": "user",
+            "content": "El jugador Alejandro dice/hace: esperamos a verque dice bastida que hace esquilax"
+        },
+        {
+            "role": "user",
+            "content": "El jugador Alejandro dice/hace: esperamos a verque dice bastida que hace esquilax"
+        },
+        {
+            "role": "assistant",
+            "content": "El silencio se tensa en la penumbra. El goteo distante del agua estancada y el arrastrar torpe de los ahogados son los únicos sonidos que rompen la quietud.\n\n**Lorek** mantiene el pulso firme con el arco tenso, apuntando a la cabeza de la criatura más cercana. **Narum** aguarda agazapado en la sombra, conteniendo la respiración con el martillo y la daga listos para descargar un golpe letal en cuanto estalle el caos.\n\nTodas las miradas recaen sobre el mediano.\n\n**Bastida (Esquilax)**, ¿qué haces? ¿Intentas apoderarte del amuleto o tomas otra acción?"
+        },
+        {
+            "role": "user",
+            "content": "El jugador Alejandro dice/hace: Bastida (Esquilax) : Pues yo me agarro al amuleto y le pido ayuda a Lúmbo"
+        },
+        {
+            "role": "assistant",
+            "content": "Esquilax aprieta con fuerza el amuleto entre sus dedos húmedos, murmurando una plegaria entre dientes a Lúmbo en busca de protección divina. El aire se siente aún más frío y pesado; el eco de su rezo parece hacer que los cuerpos henchidos de los ahogados se detengan un instante, desconcertados.\n\nEs el momento exacto.\n\n**Fran (Lorek)**: Sueltas la cuerda de tu arco corto apuntando a la cabeza del ahogado más próximo. Lanza **1d20** para tu tirada de ataque a distancia. Ten a mano también el dado de daño (**1d6**) por si impactas."
+        },
+        {
+            "role": "user",
+            "content": "El jugador J dice/hace: yo, esquilax, hago un hechizo de expulsar no muertos"
+        },
+        {
+            "role": "assistant",
+            "content": "Esquilax alza el amuleto frente a sí, invocando el poder sagrado de Lúmbo para quebrantar la voluntad impía de los cadáveres andantes. Un leve resplandor o estremecimiento recorre la penumbra cuando confrontas a las criaturas con tu fe.\n\n**Bastida (Esquilax)**: Para intentar **Expulsar Muertos Vivientes**, lanza **2d6** y dime el resultado total. \n\n*(Recordatorio: Fran (Lorek) aún tiene pendiente su tirada de **1d20** para el disparo de flecha).*"
+        },
+        {
+            "role": "user",
+            "content": "El jugador J dice/hace: 5 y 3"
+        },
+        {
+            "role": "assistant",
+            "content": "Un **8** en total.\n\nLa plegaria a Lúmbo retumba en la estancia con una vibración gélida."
+        },
+        {
+            "role": "user",
+            "content": "El jugador Fran dice/hace: he sacado un 19. tb he tirado un 1d6 y he sacado un 2"
+        },
+        {
+            "role": "assistant",
+            "content": "El poder sagrado de Lúmbo emana débilmente del amuleto en las manos de Esquilax con un 8 total: la"
+        },
+        {
+            "role": "user",
+            "content": "El jugador Fran dice/hace: pero yo soy Lorek"
+        },
+        {
+            "role": "assistant",
+            "content": "¡Cierto, Fran! Disculpa el cruce de cables. \n\nLa cuerda del arco chasquea con violencia. Con un formidable **1"
+        },
+        {
+            "role": "user",
+            "content": "El jugador Alejandro dice/hace: lorek ha saado un 19 al impactar y un 2 en daño, yo narum en cuanto tengan toda su atencion en esquilax y en lorek al mas cercano a mi y el mas alejado de ellos le hago una puñaada por la espalda con mi martillo y mi daga"
+        },
+        {
+            "role": "assistant",
+            "content": "La flecha de **Lorek** silba en la penumbra con una precisión brutal tras ese **19**: se clava con un crujido sordo en la sien hinchada de uno de los ahogados, arrancando un chorro de agua negra y carne podrida (2 puntos de daño). \n\nAl mismo tiempo, la fe de **Esquilax** resuena en la sala con ese **8**: no llega a poner en fuga despavorida a estas aberraciones henchidas, pero la luz de Lúmbo las desorienta por completo. Los cadáveres giran sus"
+        },
+        {
+            "role": "user",
+            "content": "El jugador Alejandro dice/hace: contunia"
+        },
+        {
+            "role": "assistant",
+            "content": "...los cadáveres giran sus cuellos hinchados hacia Lorek y Esquilax, cegados por la rabia y el hedor a vida. Ignoran por completo la sombra que se cierne a sus espaldas.\n\nAprovechando su distracción absoluta, **Narum** se desliza en silencio tras la criatura más rezagada. Tienes la posición perfecta para una **puñalada por la espalda** con tu daga. \n\nEn OSE, atacar por la espalda a un enemigo desprevenido te otorga un **bono de +4 a la tirada de ataque**, y si impactas, el daño se **multiplica x2** (tu bonificador de Fuerza +1 se suma también).\n\n**Alejandro (Narum)**: \nLanza **1d20** para impactar. \nLanza también **1d4** para el daño de la daga. ¿Qué sale en los dados?"
+        }
+    ]
+}
