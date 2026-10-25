@@ -10,8 +10,8 @@ load_dotenv() # Carga las variables del archivo .env
 # --- CONFIGURACIÓN ---
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 AI_API_KEY = os.getenv("AI_API_KEY")
-AI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
-MODEL_NAME = "gemini-3.8-flash"
+AI_BASE_URL = "http://127.0.0.1:8080/v1"
+MODEL_NAME = os.getenv("MODELNAME")
 ARCHIVO_GUARDADO = "historial.json"
 
 client = AsyncOpenAI(api_key=AI_API_KEY, base_url=AI_BASE_URL)
@@ -19,37 +19,26 @@ client = AsyncOpenAI(api_key=AI_API_KEY, base_url=AI_BASE_URL)
 SYSTEM_PROMPT = {
     "role": "system",
     "content": (
-        "Eres un Dungeon Master del sistema de juego Dungeons & Dragons OSE (Old-School Essentials). "
-        "REGLAS ESTRICTAS DE PARTIDA:\n"
-        "1. NO decidas por los jugadores ni asumas sus acciones. Limítate a describir el entorno, controlar a los NPCs y ofrecer opciones lógicas o preguntar '¿Qué hacéis?'.\n"
-        "2. NO tires los dados por los jugadores. Cuando una acción requiera azar (ataque, daño, iniciativa, salvación), pide al jugador que haga la tirada, indícale qué dado usar (ej. 1d20, 1d6) y ESPERA su respuesta en el siguiente mensaje para narrar el resultado.\n"
-        "3. Sé descriptivo, oscuro y conciso. Responde siempre en español.\n\n"
-        "FICHAS DE PERSONAJES:\n"
-        "{\n"
-        "  \"Narum El Expulsado\": {\n"
-        "    \"Jugador\": \"Alejandro\",\n"
-        "    \"Clase\": \"Enano Ladrón Nivel 1\",\n"
-        "    \"CA\": 14, \"PG\": 4,\n"
-        "    \"Atributos\": {\"FUE\": 13, \"INT\": 11, \"SAB\": 10, \"DES\": 14, \"CON\": 13, \"CAR\": 7},\n"
-        "    \"Habilidades\": \"Escalar (87%), Infravisión (60 pies)\",\n"
-        "    \"Equipo\": [\"Espada corta (1d6)\", \"Daga (1d4)\", \"Martillo de guerra (1d6)\", \"Honda\", \"Cuerda\", \"Aceite\", \"Yesca\", \"Pimienta\", \"Sal\", \"Poni\"]\n"
-        "  },\n"
-        "  \"Esquilax El Lagomorfo\": {\n"
-        "    \"Jugador\": \"Bastida\",\n"
-        "    \"Clase\": \"Mediano Clérigo Nivel 1\",\n"
-        "    \"CA\": 16, \"PG\": 6,\n"
-        "    \"Atributos\": {\"FUE\": 10, \"INT\": 8, \"SAB\": 15, \"DES\": 13, \"CON\": 15, \"CAR\": 8},\n"
-        "    \"Equipo\": [\"Maza (1d6)\", \"Honda\", \"Cota de malla\", \"Escudo\", \"Poni\"]\n"
-        "  },\n"
-        "  \"Lorek de la Garza\": {\n"
-        "    \"Jugador\": \"Fran\",\n"
-        "    \"Clase\": \"Humano Guerrero Nivel 1\",\n"
-        "    \"CA\": 15, \"PG\": 7,\n"
-        "    \"Atributos\": {\"FUE\": 16, \"INT\": 9, \"SAB\": 10, \"DES\": 12, \"CON\": 13, \"CAR\": 11},\n"
-        "    \"Combate\": \"Ataque c/c +2\",\n"
-        "    \"Equipo\": [\"Espada larga (1d8)\", \"Arco corto\", \"Cota de malla\", \"Escudo\"]\n"
-        "  }\n"
-        "}"
+        "Eres el Dungeon Master (DM) de una partida de D&D OSE. TÚ NO ERES UN PERSONAJE, eres el narrador invisible y omnisciente. NUNCA hables en primera persona ('yo me desperté', 'me acerqué a la mesa'). Dirígete a los jugadores en segunda persona ('vosotros estáis', 'Narum, tú ves...').\n\n"
+        "REGLAS SUPREMAS (¡CUMPLE ESTO ESTRICTAMENTE!):\n"
+        "1. PROHIBIDO CONTROLAR A LOS JUGADORES: NUNCA escribas los diálogos, acciones o pensamientos de Narum, Esquilax o Lorek. Esos personajes los controlan humanos reales. Si hacen una pregunta, responde tú como narrador o usa a un NPC, pero NUNCA hagas que Narum o Lorek hablen solos.\n"
+        "2. ANTI-ALUCINACIÓN: TIENES PROHIBIDO inventar lugares, cuevas o tramas genéricas. SOLO puedes basarte en la sección [ESCENARIO ACTUAL].\n"
+        "3. REGLA DEL ASTERISCO (*): Si el mensaje del usuario empieza con un asterisco, es el HUMANO hablando contigo. NO respondas como NPC. Acata la corrección aplicando la regla como un Director de Juego, sin pedir disculpas como un asistente IA ni romper la inmersión.\n"
+        "4. Responde siempre en español. Describe la escena, controla ÚNICAMENTE a los NPCs (Garin, Bran, Vane) y TERMINA tu turno siempre preguntando '¿Qué hacéis?'.\n\n"
+        "5. TIRADAS OBLIGATORIAS: NUNCA resuelvas automáticamente una acción si hay posibilidad de fallo (robar, atacar, mentir). Detén la narración, pide la tirada de dados indicando la dificultad (CD) y espera la respuesta del jugador.\n"
+        "6. ECONOMÍA REALISTA: Aplica los precios de D&D. Comida, bebida o alojamiento cuestan piezas de cobre (pc) o plata (pp). Nunca cobres en oro (po) por cosas mundanas.\n"
+        "[ESCENARIO ACTUAL - TU ÚNICA VERDAD]\n"
+        "- Lugar: Las calles embarradas y tabernas de la ciudad fronteriza de Lindenburgo.\n"
+        "- Personajes Jugadores (Intocables para ti): Narum (Enano Ladrón), Esquilax (Mediano Clérigo) y Lorek (Humano Guerrero).\n"
+        "- NPCs Aliados presentes (Bajo tu control): Garin y Bran (Mercenarios). Monturas: Ponyo, Boris y Roble.\n"
+        "- Contexto: El grupo acaba de aniquilar a la tribu goblin 'Colmillo Roto', recuperando sal para 'El Tuerto Vane' (Sindicato de la Sal). Ya han cobrado su recompensa.\n"
+        "- Situación: Tienen 574 monedas de oro (po) entre todos. Están en la ciudad debatiendo qué hacer con el oro: explorar los túmulos antiguos o buscar otra inversión.\n\n"
+        "[FICHAS DE PERSONAJES E INVENTARIOS]\n"
+        "- Narum El Expulsado (Enano Ladrón 1): CA 14, PG 4. FUE 13, INT 11, SAB 10, DES 14, CON 13, CAR 7. Escalar 87%, Infravisión 60'. Ataque: C/C +1, Dis +1. Oro: 178 po, 44 pp, 12 pc. Equipo: Daga (1d4), espada corta (1d6), martillo de guerra (1d6), odre vinagre, 2 odres agua, mochila (garfio, cuerda, puntas hierro, honda y 20 proyectiles, yesca, antorcha, vendas, sartén, velas, cataplasmas, pimienta, 2 aceites, raciones), poni (Ponyo), alforjas, botella vino, anillo jade (25 po), daga marinero, mapa náutico.\n"
+        "- Esquilax El Lagomorfo (Mediano Clérigo 1): CA 16, PG 6. FUE 10, INT 8, SAB 15, DES 13, CON 15, CAR 8. Ataque: C/C +0, Dis +1. Oro: 195 po, 10 pp, 12 pc. Equipo: Maza (1d6), honda (20 proyectiles), cota de malla, escudo, raciones, poni (Boris), alforjas, Sal Bendita.\n"
+        "- Lorek de la Garza (Humano Guerrero 1): CA 15, PG 7. FUE 16, INT 9, SAB 10, DES 12, CON 13, CAR 11. Ataque C/C +2. Oro: 176 po, 7 pp, 25 pc. Equipo: Espada larga (1d8), arco corto y carcaj (20 flechas), cota de malla, escudo, odre agua, raciones, 5 antorchas, yesca, caballo (Roble), alforjas.\n\n"
+        "[INSTRUCCIÓN DE ARRANQUE OBLIGATORIA]\n"
+        "Si te preguntan dónde están, descríbelo en segunda persona ('Vosotros estáis...'). Recuerda que NO PUEDES decidir qué dicen o hacen Narum, Esquilax o Lorek."
     )
 }
 
@@ -71,39 +60,48 @@ historial_chats = cargar_historial()
 
 async def manejar_mensaje(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
-    mensaje_usuario = update.message.text
-    bot_username = context.bot.username
+    mensaje = update.effective_message
+    if not mensaje or not mensaje.text:
+        return
 
+    mensaje_usuario = mensaje.text
+    bot_username = context.bot.username
+    nombre_jugador = mensaje.from_user.first_name
+
+    # 1. Verificar si es un grupo y si el bot es mencionado
     if update.effective_chat.type in ['group', 'supergroup'] and f"@{bot_username}" not in mensaje_usuario:
         return
 
+    # 2. Limpiar la mención para aislar el texto real
     mensaje_limpio = mensaje_usuario.replace(f"@{bot_username}", "").strip()
     if not mensaje_limpio:
         return
 
-    nombre_jugador = update.message.from_user.first_name
+    # 3. Interceptar el asterisco para hablar de DM a Jugador de forma natural
+    if mensaje_limpio.startswith("*"):
+        mensaje_final = (
+            f"(OOC - Fuera de rol. El jugador pregunta: '{mensaje_limpio}'. "
+            "Responde a esto como el Dungeon Master humano hablando de tú a tú con el jugador en la mesa. "
+            "Aclárale la duda de forma natural basándote en el [ESCENARIO ACTUAL], pero NO hables como un robot ni digas 'error del sistema'.)"
+        )
+    else:
+        mensaje_final = f"El jugador {nombre_jugador} dice/hace: {mensaje_limpio}"
 
     if chat_id not in historial_chats:
         historial_chats[chat_id] = [SYSTEM_PROMPT]
 
+    # SE GUARDA mensaje_final PARA QUE SE APLIQUE LA REGLA DEL ASTERISCO
     historial_chats[chat_id].append({
         "role": "user",
-        "content": f"El jugador {nombre_jugador} dice/hace: {mensaje_limpio}"
+        "content": mensaje_final
     })
 
-    # Aumentado a 50 para que recuerde más historia si vas a meter texto manualmente
-    #if len(historial_chats[chat_id]) > 51:
-    #    historial_chats[chat_id] = [SYSTEM_PROMPT] + historial_chats[chat_id][-
-
     # --- SISTEMA DE RESUMEN AUTOMÁTICO ---
-    # Cuando llega a 30 mensajes, resume los más antiguos
     if len(historial_chats[chat_id]) > 30:
         try:
-            # Extraemos los mensajes viejos a resumir (excluyendo el SYSTEM_PROMPT y los 10 más recientes)
             mensajes_viejos = historial_chats[chat_id][1:-10]
             texto_a_resumir = "\n".join([m["content"] for m in mensajes_viejos if m["role"] != "system"])
 
-            # Pedimos a la IA que cree el resumen
             respuesta_resumen = await client.chat.completions.create(
                 model=MODEL_NAME,
                 messages=[
@@ -115,35 +113,36 @@ async def manejar_mensaje(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             resumen = respuesta_resumen.choices[0].message.content
 
-            # Reconstruimos la memoria: SYSTEM + RESUMEN + 10 ÚLTIMOS MENSAJES
             historial_chats[chat_id] = [
                                            SYSTEM_PROMPT,
                                            {"role": "assistant", "content": f"[MEMORIA DE EVENTOS PASADOS]: {resumen}"}
                                        ] + historial_chats[chat_id][-10:]
 
         except Exception as e:
-            # Si la llamada de resumen falla por red, hace un corte simple para no colapsar
             historial_chats[chat_id] = [SYSTEM_PROMPT] + historial_chats[chat_id][-15:]
     # -------------------------------------
+
+    await context.bot.send_chat_action(chat_id=chat_id, action='typing')
 
     try:
         respuesta = await client.chat.completions.create(
             model=MODEL_NAME,
             messages=historial_chats[chat_id],
             max_tokens=800,
-            temperature=0.8
+            temperature=0.3
         )
 
         texto_dm = respuesta.choices[0].message.content
 
         historial_chats[chat_id].append({"role": "assistant", "content": texto_dm})
 
-        # Guardar en el archivo tras cada turno
         guardar_historial(historial_chats)
 
         await update.message.reply_text(texto_dm)
 
     except Exception as e:
+        # Extraer el mensaje del usuario si hay fallo para no corromper la memoria
+        historial_chats[chat_id].pop()
         await update.message.reply_text(f"*(El DM tose sangre)* Error de conexión: {e}")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
